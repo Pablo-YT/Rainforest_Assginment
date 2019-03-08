@@ -9,7 +9,7 @@
 
 {% for Product in products %}
 <ul>
-<li>Name: {{ Product.name }}</li>
+<li><a href="{% url 'products_show' id=Product.pk %}">Name: {{ Product.name }}</a></li>
 <li>Description: {{Product.description}}</li>
 <li>Price: {{Product.price}}</li>
 
