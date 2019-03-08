@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Products</title>
+</head>
+<body>
+
+<h1>Hi this is the products page</h1>
+
+{% for Product in products %}
+<ul>
+<li>Name: {{ Product.name }}</li>
+<li>Description: {{Product.description}}</li>
+<li>Price: {{Product.price}}</li>
+
+
+</ul>
+
+
+
+{% endfor %}
+
+</body>
+</html>
