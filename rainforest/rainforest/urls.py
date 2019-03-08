@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from rainforest.views import products, products_show, root, product_create
+from rainforest.views import products, products_show, root, product_create, create_product
 from rainforest.forms import product_form
 
 urlpatterns = [
@@ -23,5 +23,7 @@ urlpatterns = [
     path('products/', products, name='products_home'),
     path('products/<int:id>',products_show, name='products_show'),
     path('create/', product_create),
-    path('', root)
+    path('', root),
+    path('products/new', create_product, name='create_product')
+
 ]

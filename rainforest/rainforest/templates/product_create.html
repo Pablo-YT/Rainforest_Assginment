@@ -1,11 +1,21 @@
 {% extends 'base.html'%}
 {% block content %}
-
-<form>
-	{{ form.as_p }}
-	<input type="submit" value="">
-
+<h1>hello</h1>
+<form action="{% url 'create_product' %}" method="POST">
+	      {% csrf_token %}
+	      <label for="product_name">
+	        <span>Name:</span>
+	        <input type="text" name="product_name" value="">
+	      </label>
+	      <label for="product_description">
+	        <span>Message:</span>
+	        <textarea id="product-description" name="product_description"></textarea>
+	      </label>
+				<label for="product_price">
+	        <span>price:</span>
+					<input type="number" name="product_price" step="0.01" required="" id="id_price">
+	      </label>
+	      <button type="submit" name="button">Submit</button>
 </form>
-
 
 {% endblock %}
