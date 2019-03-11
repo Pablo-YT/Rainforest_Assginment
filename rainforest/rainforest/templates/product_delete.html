@@ -1,7 +1,10 @@
 {% extends 'base.html'%}
 {% block content %}
 
-<h1>hello</h1>
+<form class="" action="{% url 'product_delete'%}" method="post">
+  {% crsf_token %}
+  <input type="submit" name="product" value="Delete">
+</form>
 
 
 {% endblock %}

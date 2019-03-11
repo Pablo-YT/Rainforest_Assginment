@@ -28,12 +28,16 @@ def product_create(request):
 	else:
 		return render(request, 'product_create.html', context)
 
-def product_delete(request, id):
+def product_edit(request, id):
 	product = Product.objects.get(pk=id)
-	if request.method == 'POST':
-		product.delete()
+	form = product_form(request.POST or None, instance=product)
+	if form.is_valid():
+		product = form.save(commit=False)
+		product.save()
 		return HttpResponseRedirect('/products/')
 	context = {
+		'form': form,
 		'product': product
-	}
-	return render(request, 'product_delete.html', context)
+		}
+		# return HttpResponseRedirect('/products/')
+	return render(request, 'product_edit.html', context)

@@ -1,11 +1,11 @@
 {% extends 'base.html'%}
 {% block content %}
-
+<h1>H</h1>
 <ul>
 <li>Name: {{ product.name }}</li>
 <li>Description: {{product.description}}</li>
 <li>Price: {{product.price}}</li>
-
+<a href="{% url 'product_edit' id=product.pk %}">Edit</a>
 </ul>
 
 
