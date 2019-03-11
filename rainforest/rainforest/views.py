@@ -1,5 +1,5 @@
 from django.urls import path
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rainforest.models import Product
 from django.http import HttpResponseRedirect
 from .forms import product_form
@@ -21,14 +21,19 @@ def root(request):
 
 def product_create(request):
 	form = product_form(request.POST or None)
+	context = {'form':form}
 	if form.is_valid():
 		form.save()
-	context = {'form':form}
-	return render(request, 'product_create.html', context)
+		return HttpResponseRedirect('/products/')
+	else:
+		return render(request, 'product_create.html', context)
 
-def create_product(request):
-	product_name = request.POST['product_name']
-	product_description = request.POST['product_description']
-	product_price = float(request.POST['product_price'])
-	new_product = Product.objects.create(name=product_name, description=product_description, price=product_price)
-	return HttpResponseRedirect('/products/')
+def product_delete(request, id):
+	product = Product.objects.get(pk=id)
+	if request.method == 'POST':
+		product.delete()
+		return HttpResponseRedirect('/products/')
+	context = {
+		'product': product
+	}
+	return render(request, 'product_delete.html', context)
