@@ -1,10 +1,10 @@
 {% extends 'base.html'%}
 {% block content %}
 
-<form class="" action="{% url 'product_delete'%}" method="post">
-  {% crsf_token %}
-  <input type="submit" name="product" value="Delete">
+<form action="{% url 'product_delete' id=product.pk %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" name="" value="Delete">
 </form>
-
 
 {% endblock %}
