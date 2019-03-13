@@ -13,7 +13,7 @@ def products(request):
 
 def products_show(request, id):
 	product = Product.objects.get(pk=id)
-	reviews = Review.objects.all()
+	reviews = product.reviews.all()
 	if request.method == 'POST':
 		review_form = ReviewForm(request.POST)
 		if review_form.is_valid():
@@ -30,6 +30,20 @@ def products_show(request, id):
 		'review_form': review_form
 	}
 	return render(request, 'product.html', context)
+
+def edit_review(request, id):
+	review = Review.objects.get(pk=id)
+	form = ReviewForm(request.POST or None, instance=review)
+	if form.is_valid():
+		review = form.save(commit=False)
+		review.save()
+		return HttpResponseRedirect('/products/')
+	context = {
+		'form': form,
+		'review': review
+		}
+		# return HttpResponseRedirect('/products/')
+	return render(request, 'edit_review.html', context)
 
 def root(request):
 	return HttpResponseRedirect('products')
