@@ -7,15 +7,19 @@
 <li>Price: {{product.price_in_dollars}}</li>
 <a href="{% url 'product_edit' id=product.pk %}">Edit</a>
 <h1>Review count = {{ product.reviews.count }}</h1>
-  {% for posts in reviews %}
-    <h4>{{ posts.name }}</h4>
-    <li>{{ posts.message }}</li>
+
+  {% for review in reviews %}
+    <h4>{{ review.name }}</h4>
+    <li>{{ review.message }}</li>
+    <a href="{% url 'edit_review' id=review.id %}">Edit: {{review.id}}</a>
   {% endfor %}
+
 <form action="{% url 'products_show' id=product.pk %}" method="post">
   {% csrf_token %}
   {{ review_form.as_p }}
   <input type="submit" name="" value="Post">
 </form>
+
 <a href="{% url 'product_review' id=product.id %}">Review</a>
 <form action="{% url 'product_delete' id=product.pk %}" method="post">
   {% csrf_token %}
