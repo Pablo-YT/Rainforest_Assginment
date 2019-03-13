@@ -25,3 +25,9 @@ class Product(models.Model):
 	# 		raise forms.ValidationError("Error to long")
 	# 	else:
 	# 		return description
+
+
+class Review(models.Model):
+	name = models.CharField(max_length=255)
+	message = models.TextField()
+	product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
