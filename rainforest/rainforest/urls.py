@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from rainforest.views import products, products_show, root, product_create, product_edit, product_delete, product_review, edit_review
+from rainforest.views import products, products_show, root, product_create, product_edit, product_delete, product_review, edit_review, delete_review
 from rainforest.forms import product_form
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('products/<int:id>/delete', product_delete, name='product_delete'),
     path('products/<int:id>/review', product_review, name='product_review'), #DONT NEED THIS LINE BUT DONT KNOW HOW TO DELTE
     path('review/<int:id>', edit_review, name='edit_review'),
+    path('review/<int:id>/delete', delete_review, name='delete_review'),
     path('', root)
 
 ]

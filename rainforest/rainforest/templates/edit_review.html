@@ -6,4 +6,9 @@
   {{ form.as_p }}
   <input type="submit" name="" value="Done">
 </form>
+<form action="{% url 'delete_review' id=review.pk %}" method="post">
+  {% csrf_token %}
+  {{ review_form.as_p }}
+  <input type="submit" name="" value="Delete">
+</form>
 {% endblock %}

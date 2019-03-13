@@ -110,3 +110,12 @@ def product_review(request, id):
 	response = render(request, 'review.html', context)
 	return HttpResponse(response)
 # DONT NEED THIS FUNCTION BUT DONT KNOW HWO TO DELETE IT
+def delete_review(request, id):
+	review = Review.objects.get(pk=id)
+	review_form = ReviewForm(request.POST or None, instance=review)
+	review.delete()
+	context = {
+		'review_form': review_form,
+		'review': review
+		}
+	return HttpResponseRedirect('/products/')
