@@ -4,7 +4,7 @@
 
 <h1>Hi this is the products page</h1>
 
-{% for Product in products %}
+{% for Product in product %}
 <ul>
 <li><a href="{% url 'products_show' id=Product.pk %}">Name: {{ Product.name }}</a></li>
 <li>Description: {{Product.description}}</li>

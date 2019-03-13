@@ -4,7 +4,7 @@
 <ul>
 <li>Name: {{ product.name }}</li>
 <li>Description: {{product.description}}</li>
-<li>Price: {{product.price}}</li>
+<li>Price: {{product.price_in_dollars}}</li>
 <a href="{% url 'product_edit' id=product.pk %}">Edit</a>
 <form action="{% url 'product_delete' id=product.pk %}" method="post">
   {% csrf_token %}

@@ -6,7 +6,8 @@ from .forms import product_form
 
 
 def products(request):
-	context = {'products': Product.objects.all()}
+	product = Product.objects.all()
+	context = {'product': product}
 	return render(request, 'products.html', context)
 
 

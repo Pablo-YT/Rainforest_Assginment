@@ -7,11 +7,16 @@ min_length = MinLengthValidator(limit_value=10, message='Error: Description need
 class Product(models.Model):
 	name = models.CharField(max_length=255)
 	description = models.TextField(max_length=500, validators=[min_length])
-	price = models.CharField(max_length=255)
+	price = models.IntegerField()
 
 
 	def __str__(self):
 		return self.name
+
+	def price_in_dollars(self):
+		dollars = self.price 
+		return "${:.2f}".format(dollars)
+
 
 	# def clean_description(self, *args, **kwargs):
 	# 	print('h')
