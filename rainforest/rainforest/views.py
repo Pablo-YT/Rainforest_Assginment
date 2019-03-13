@@ -43,14 +43,32 @@ def product_edit(request, id):
 	return render(request, 'product_edit.html', context)
 
 def product_delete(request, id):
+	# product = Product.objects.get(pk=id)
+	# form = product_form(request.POST or None, instance=product)
+	# if form.is_valid():
+	# 	product = form.save(commit=False)
+	# 	product.delete()
+	# 	return HttpResponseRedirect('/products/')
+	# context = {
+	# 	'form': form,
+	# 	'product': product
+	# 	}
+	# return render(request, 'product_delete.html', context)
 	product = Product.objects.get(pk=id)
 	form = product_form(request.POST or None, instance=product)
-	if form.is_valid():
-		product = form.save(commit=False)
-		product.delete()
-		return HttpResponseRedirect('/products/')
+	product.delete()
 	context = {
 		'form': form,
 		'product': product
 		}
-	return render(request, 'product_delete.html', context)
+	return HttpResponseRedirect('/products/')
+#
+# def delete_real(request, id):
+# 	product = Product.objects.get(pk=id)
+# 	form = product_form(request.POST or None, instance=product)
+# 	form.delete()
+# 	context = {
+# 		'form': form,
+# 		'product': product
+# 		}
+# 	return HttpResponseRedirect('/products/')

@@ -6,6 +6,11 @@
 <li>Description: {{product.description}}</li>
 <li>Price: {{product.price}}</li>
 <a href="{% url 'product_edit' id=product.pk %}">Edit</a>
+<form action="{% url 'product_delete' id=product.pk %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" name="" value="Delete">
+</form>
 </ul>
 
 
