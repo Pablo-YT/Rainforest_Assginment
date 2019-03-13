@@ -10,7 +10,6 @@
   {% for posts in reviews %}
     <h4>{{ posts.name }}</h4>
     <li>{{ posts.message }}</li>
-    <a href="{% url 'edit_review' id=r.pk %}"></a>
   {% endfor %}
 <form action="{% url 'products_show' id=product.pk %}" method="post">
   {% csrf_token %}

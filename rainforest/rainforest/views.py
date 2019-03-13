@@ -38,12 +38,10 @@ def edit_review(request, id):
 		review = form.save(commit=False)
 		review.save()
 		return HttpResponseRedirect('/products/')
-	context = {
+	return render(request, 'edit_review.html', {
 		'form': form,
 		'review': review
-		}
-		# return HttpResponseRedirect('/products/')
-	return render(request, 'edit_review.html', context)
+	})
 
 def root(request):
 	return HttpResponseRedirect('products')
