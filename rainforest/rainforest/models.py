@@ -1,12 +1,12 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 min_length = MinLengthValidator(limit_value=10, message='Error: Description needs to be atleast 10 characters long')
 
 class Product(models.Model):
 	name = models.CharField(max_length=255)
-	description = models.TextField(max_length=500, validators=[min_length])
+	description = models.TextField(max_length=500, validators=[MinLengthValidator(10), MaxLengthValidator(500)])
 	price = models.CharField(max_length=255)
 
 
