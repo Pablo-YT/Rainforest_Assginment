@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 min_length = MinLengthValidator(limit_value=10, message='Error: Description needs to be atleast 10 characters long')
 
@@ -14,7 +14,7 @@ class Product(models.Model):
 		return self.name
 
 	def price_in_dollars(self):
-		dollars = self.price 
+		dollars = self.price
 		return "${:.2f}".format(dollars)
 
 
