@@ -1,8 +1,8 @@
 from django.urls import path
 from django.shortcuts import render, get_object_or_404
-from rainforest.models import Product
-from django.http import HttpResponseRedirect
-from .forms import product_form
+from rainforest.models import Product, Review
+from django.http import HttpResponseRedirect, HttpResponse
+from .forms import product_form, ReviewForm
 
 
 def products(request):
@@ -13,7 +13,22 @@ def products(request):
 
 def products_show(request, id):
 	product = Product.objects.get(pk=id)
-	context = {'product': product}
+	reviews = Review.objects.all()
+	if request.method == 'POST':
+		review_form = ReviewForm(request.POST)
+		if review_form.is_valid():
+			new_review = review_form.save()
+			return HttpResponseRedirect('/products/{}'.format(id))
+		else:
+			# maybe have to add form errors
+			pass
+	else:
+		review_form = ReviewForm(initial={'product': id})
+	context = {
+		'product': product,
+		'reviews': reviews,
+		'review_form': review_form
+	}
 	return render(request, 'product.html', context)
 
 def root(request):
@@ -63,13 +78,23 @@ def product_delete(request, id):
 		'product': product
 		}
 	return HttpResponseRedirect('/products/')
-#
-# def delete_real(request, id):
-# 	product = Product.objects.get(pk=id)
-# 	form = product_form(request.POST or None, instance=product)
-# 	form.delete()
-# 	context = {
-# 		'form': form,
-# 		'product': product
-# 		}
-# 	return HttpResponseRedirect('/products/')
+
+def product_review(request, id):
+	product = Product.objects.get(pk=id)
+	if request.method == 'POST':
+		review_form = ReviewForm(request.POST)
+		if review_form.is_valid():
+			new_review = review_form.save()
+			return HttpResponseRedirect('/products/')
+		else:
+			# maybe have to add form errors
+			pass
+	else:
+		review_form = ReviewForm(initial={'product': id})
+	context = {
+		'review_form': review_form,
+		'product': product
+		}
+	response = render(request, 'review.html', context)
+	return HttpResponse(response)
+# DONT NEED THIS FUNCTION BUT DONT KNOW HWO TO DELETE IT

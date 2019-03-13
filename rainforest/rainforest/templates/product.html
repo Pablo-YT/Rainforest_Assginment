@@ -5,6 +5,17 @@
 <li>Name: {{ product.name }}</li>
 <li>Description: {{product.description}}</li>
 <li>Price: {{product.price_in_dollars}}</li>
+<h1>Reviews</h1>
+{% for posts in reviews %}
+  <h4>{{ posts.name }}</h4>
+  <li>{{ posts.message }}</li>
+{% endfor %}
+<form action="{% url 'products_show' id=product.pk %}" method="post">
+  {% csrf_token %}
+  {{ review_form.as_p }}
+  <input type="submit" name="" value="Post">
+</form>
+<a href="{% url 'product_review' id=product.id %}">Review</a>
 <a href="{% url 'product_edit' id=product.pk %}">Edit</a>
 <form action="{% url 'product_delete' id=product.pk %}" method="post">
   {% csrf_token %}
